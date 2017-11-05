@@ -1,0 +1,176 @@
+<div class="container-fluid">
+  <div class="row" ng-if="!bc.adding">
+    <div class="col-sm-12">
+        <button class="btn btn-secondary btn-sm" ng-click="bc.adding = true"><i class="fa fa-plus"></i>Add</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <form ng-if="bc.adding">
+    <div class="form-group row">
+      <label class="col-form-label col-sm-3">Title</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" placeholder="Snippet Title" ng-model="bc.SnippetService.currentSnippet.title"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-3">Language</label>
+      <div class="col-sm-9">
+        <input type="text" placeholder="Javascript, AngularJS" class="form-control" string-to-array ng-model="bc.SnippetService.currentSnippet.languages"/>
+      </div>
+    </div>
+    <div class="form-group row description-row">
+      <label class="col-form-label col-sm-3">Description</label>
+      <div class="col-sm-9">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" ng-class="{'active':!bc.showPreview}" ng-click="bc.showPreview = false">Edit</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ng-class="{'active':bc.showPreview}" ng-click="bc.showPreview = true">Preview</a>
+          </li>
+        </ul>
+        <div markdown-to-html="bc.SnippetService.currentSnippet.description || ''" ng-if="bc.showPreview"></div>
+        <textarea placeholder="Description text" type="text" class="form-control" ng-model="bc.SnippetService.currentSnippet.description" ng-if="!bc.showPreview"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-form-label col-sm-3">Snippet</label>
+      <div class="col-sm-9">
+        <div ace-editor
+             related-id="bc.SnippetService.currentSnippet.id"
+             ng-model="bc.SnippetService.currentSnippet.snippet"
+             language="bc.SnippetService.currentSnippet.languages[0]"
+             style="height:100px">
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" ng-click="bc.SnippetService.addSnippet(bc.SnippetService.currentSnippet); bc.adding=false">Save</button>
+    <button class="btn btn-danger" ng-click="bc.SnippetService.currentSnippet={}; bc.adding=false">Cancel</button>
+  </form>
+</div>
+
+<hr style="margin-top:10px" />
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-8">
+      <div ng-click="bc.clearSearchText()" style="position:absolute;right:40px;top:5px;width:0px; cursor:pointer"><i class="fa fa-times"></i></div>
+      <input placeholder="Search..." type="text" ng-model="searchTextInComplete" ng-keypress="keyPressed($event)"  class="form-control">
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group" role="group" aria-label="Code or Description">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          ng-click="bc.toggleDescription(false)">
+          code
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          ng-click="bc.toggleDescription(true)">
+          desc
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!--<div class="col-md-4 col-lg-4" ng-repeat="snippet in bc.SnippetService.snippets|filter:bc.searchText|orderBy:'-id' track by snippet.id"> -->
+      <!--<div class="col-md-4 col-lg-4" dir-paginate="snippet in bc.SnippetService.snippets | filter:q | filter: { 'searchText' : bc.searchText }| itemsPerPage: pageSize | orderBy : '-id' " current-page="currentPage"> -->
+      <div class="col-md-4 col-lg-4" dir-paginate="snippet in bc.SnippetService.snippets | filter:q | filter: filterByText(searchText) | itemsPerPage: pageSize track by snippet.created" current-page="currentPage">
+
+      <div class="snippet-card card card-default">
+        <div class="card-header">
+          <button class="float-right btn-danger btn-sm btn" ng-click="bc.SnippetService.deleteSnippet(snippet.id)">
+            <i class="fa fa-trash"></i>
+          </button>
+          <button class="float-right btn-sm btn-secondary btn" ui-sref="root.detail({id:snippet.id})">
+            <i class="fa fa-edit"></i>
+          </button>
+
+          <button class="float-right btn-sm btn-secondary btn" ng-click="bc.copy(snippet.id)">
+
+            <div class="tooltip tooltip-left" role="tooltip" style="right:110px; top: 12px; opacity: 1" ng-if="bc.lastCopied == snippet.id">
+              <div class="tooltip-inner">
+                Copied!
+              </div>
+            </div>
+            <i class="fa fa-copy"></i>
+          </button>
+          {{::snippet.title}}
+          <br/>
+          <!--
+          <div class="btn-group pull-right" role="group" aria-label="Code or Description">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              ng-class="{'active':!bc.showDescription[snippet.id]}"
+              ng-click="bc.showDescription[snippet.id]=false">
+              code
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              ng-disabled="!snippet.description"
+              ng-class="{'active':bc.showDescription[snippet.id]}"
+              ng-click="bc.showDescription[snippet.id]=true">
+              desc
+            </button>
+          </div> -->
+        </div>
+        <div class="card-body">
+
+           <div ng-if="bc.showDescription[snippet.id]" ng-bind="snippet.description||''" style="height: 178.889px; white-space: pre-wrap;">
+
+          </div>
+          <div ng-if="!bc.showDescription[snippet.id]" ace-editor ng-model="snippet.snippet" language="snippet.languages[0]" readonly="true"
+             related-id="snippet.id">
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <div class="row">
+             <div class="text-left col">
+              <!--<button class="language mr-auto" ng-click="searchText=searchTextInComplete=language.trim()" ng-repeat="language in snippet.languages">{{language}}</button> -->
+              <button class="language mr-1 mb-1" ng-click="doSearch(language.trim())" ng-repeat="language in snippet.languages">{{language}}</button>
+            </div>
+              <div class="mr-3 float-right text-right">
+                <div class="btn-group btn-group-sm text-right" style="height:40px;float:right" role="group" aria-label="Code or Description">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      ng-class="{'active':!bc.showDescription[snippet.id]}"
+                      ng-click="bc.showDescription[snippet.id]=false">
+                      code
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      ng-disabled="!snippet.description"
+                      ng-class="{'active':bc.showDescription[snippet.id]}"
+                      ng-click="bc.showDescription[snippet.id]=true">
+                      desc
+                    </button>
+
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+  <br/>
+  <div class="row">
+       <div class="mx-auto">
+       <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" ></dir-pagination-controls>
+       </div>
+  </div>
+</div>
+
+</div>

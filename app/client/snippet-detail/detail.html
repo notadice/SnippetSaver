@@ -1,0 +1,43 @@
+<div class="container-fluid" ng-keyup="sdc.keyHandler($event)">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <button class="btn btn-primary float-right" ui-sref="root.mainBrowse">
+            <i class="fa fa-arrow-left"></i>
+          </button>
+          <h1>
+            <input type="text" ng-model="sdc.loadedSnippet.title"/>
+          </h1>
+          <input type="text" string-to-array
+            ng-model="sdc.loadedSnippet.languages"
+            ng-model-options="{updateOn: 'blur'}"
+            ng-change="sdc.updateLanguages()" />
+        </div>
+        <div class="card-body">
+
+          <div class="description-row">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" ng-class="{'active':!sdc.showPreview}" ng-click="sdc.showPreview = false">Edit</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" ng-class="{'active':sdc.showPreview}" ng-click="sdc.showPreview = true">Preview</a>
+              </li>
+            </ul>
+            <div ng-bind="sdc.loadedSnippet.description || ''" ng-if="sdc.showPreview" style="white-space: pre-wrap; max-height: 100px; overflow: scroll;"></div>
+            <textarea type="text" class="form-control" ng-model="sdc.loadedSnippet.description" ng-if="!sdc.showPreview"></textarea>
+          </div>
+          <div style="height:400px; font-size:16pt" ace-editor ng-model="sdc.loadedSnippet.snippet" language="sdc.loadedSnippet.languages[0]">
+          </div>
+        </div>
+        <div class="card-footer">
+          <span ng-repeat="language in sdc.loadedSnippet.languages" class="language">
+            {{language}}
+          </span>
+        </div>
+
+      </div>      
+    </div>
+  </div>
+</div>
