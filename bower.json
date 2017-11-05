@@ -1,0 +1,35 @@
+{
+  "name": "snippet-saver",
+  "authors": [
+    "Shaun Husain <shaun@intellectual-tech.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.6.2",
+    "angular-toastr": "^2.1.1",
+    "angular-ui-router": "ui-router#^0.4.2",
+    "lodash": "^4.17.4",
+    "clipboard": "^1.6.1",
+    "ng-showdown": "^1.1.0",
+    "ngstorage": "^0.3.11",
+    "ace-builds": "^1.2.6"
+  },
+  "dependencies": {
+    "angularUtils-pagination": "angular-utils-pagination#^0.11.1",
+    "idb": "https://github.com/jakearchibald/idb.git#^2.0.4"
+  },
+  "resolutions": {
+    "angular": "1.6.4"
+  }
+}

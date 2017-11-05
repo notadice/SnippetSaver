@@ -1,0 +1,89 @@
+[
+  {
+    "snippet": "for(int i=10; i>1; i--){\n    System.out.println(\"The value of i is: \"+i);\n}",
+    "title": "for loop",
+    "languages": [
+      "Java"
+    ],
+    "id": 35
+  },
+  {
+    "snippet": "for i in $( ls ); do\n    echo item: $i\ndone",
+    "title": "for loop",
+    "languages": [
+      "Bash"
+    ],
+    "id": 34
+  },
+  {
+    "snippet": "for( a = 10; a < 20; a = a + 1 ){\n      printf(\"value of a: %d\\n\", a);\n}",
+    "title": "for loop",
+    "languages": [
+      "C"
+    ],
+    "id": 33
+  },
+  {
+    "snippet": " dd if=/home/downloads/windows7.iso of=/dev/sdc",
+    "title": "dd iso",
+    "languages": [
+      "Ubuntu",
+      " Debian"
+    ],
+    "id": 32
+  },
+  {
+    "snippet": "for (i = 0; i < cars.length; i++) {\n    text += cars[i] + \"<br>\";\n} ",
+    "title": "for loop",
+    "languages": [
+      "Javascript"
+    ],
+    "id": 31
+  },
+  {
+    "snippet": "for (int a = 10; a < 20; a = a + 1) {\n     Console.WriteLine(\"value of a: {0}\", a);\n}",
+    "title": "for loop",
+    "languages": [
+      "C#"
+    ],
+    "id": 26
+  },
+  {
+    "snippet": "for( int a = 10; a < 20; a = a + 1 ) {\n      cout << \"value of a: \" << a << endl;\n   }",
+    "title": "for loop",
+    "languages": [
+      "C++"
+    ],
+    "id": 24
+  },
+  {
+    "snippet": "ssh remote_username@remote_host",
+    "title": "ssh in machine",
+    "id": 22
+  },
+  {
+    "snippet": "  days = {\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\"}\n",
+    "title": "create table lua",
+    "languages": [
+      "Lua"
+    ],
+    "id": 21
+  },
+  {
+    "snippet": "sudo apt-get --purge remove && sudo apt-get autoremove && sudo apt-get clean",
+    "title": "uninstall app",
+    "languages": [
+      "Ubuntu",
+      "    Debian"
+    ],
+    "id": 20
+  },
+  {
+    "snippet": "names = {'John', 'Joe', 'Steve'}\nfor i, name in ipairs(names) do\n  print (name)\nend",
+    "title": "for loop list",
+    "languages": [
+      "Lua"
+    ],
+    "id": 19
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "name": "snippet-saver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@lab.intellectual-tech.com:websites/marcusGill.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-latest": "^6.22.0",
+    "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^3.0.3",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-less": "^3.3.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-rev": "^7.1.2",
+    "gulp-uglify": "^2.0.1",
+    "gulp-usemin": "^0.3.28",
+    "gulp-util": "^3.0.8"
+  }
+}
